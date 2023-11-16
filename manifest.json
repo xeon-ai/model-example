@@ -1,0 +1,14 @@
+{
+    "name": "Example",
+    "description": "Some description",
+    "version": "0.0.1",
+    "author": "xeon",
+    "model": {
+        "baseModel": "yolov8n",
+        "classes": [
+            "1",
+            "2",
+            "3"
+        ]
+    }
+}
