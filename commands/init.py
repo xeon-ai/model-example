@@ -1,20 +1,11 @@
 import json
 import os
 
-def get_input(prompt: str, default=None):
-    """
-    Get input from the user.
-    """
-    if default:
-        return input(f'{prompt} [{default}]: ') or default
-    else:
-        return input(f'{prompt}: ')
-    
-def get_input_boolean(prompt: str, default=None):
-    """
-    Gets a yes or no value from the terminal.
-    """
-    return get_input(prompt + ' (y/n)', default) == 'y'
+from urllib.parse import urlparse
+from .update import update_dataset
+from .utils import get_input, get_input_boolean
+
+allowed_models = ["yolov8n", "yolov8s", "yolov8m", "yolov8l", "yolov8x"]
 
 def get_manifest():
     """
@@ -34,12 +25,41 @@ def get_manifest():
     data['model'] = dict()
     data['model']['baseModel'] = get_input('Pretrained model', 'yolov8n')
 
-    # Get information on the classes this model is trained to detect
-    data['model']['classes'] = []
-    while get_input_boolean('Add a class'):
-        data['model']['classes'].append(get_input('Class name'))
+    # Check if the model is valid
+    if data['model']['baseModel'] not in allowed_models:
+        print('Invalid model. Please choose one of the following:')
+        print(allowed_models)
+        return
+
+    # Get information on the dataset associated with the project
+    data['dataset'] = dict()
+    data['dataset']['path'] = get_input('Path to dataset', 'dataset/')
+
+    # Parse the dataset path as a URL
+    url = urlparse(data['dataset']['path'])
+
+    # Check if the dataset path exists
+    if url.netloc == '' and not os.path.exists(data['dataset']['path']):
+        print('Dataset path does not exist.')
+        return
     
-    print('---')
+    # If the dataset path is a robloflow dataset URL, parse it
+    if url.netloc in ['universe.roboflow.com', 'app.roboflow.com']:
+        split = url.path.split('/')
+
+        size = len(split)
+        # Check if the dataset path is valid
+        if size > 5 or size < 4:
+            print('Invalid dataset URL. Make sure you copy it exactly as it appears in the Roboflow app.')
+            return
+
+        data['dataset']['workspace'] = split[1]
+        data['dataset']['project'] = split[2]
+        data['dataset']['version'] = int(split[3] if size == 4 else split[4])
+
+        print("\nInstalling dataset...")
+        update_dataset(data['dataset'], data['model']['baseModel'])
+
 
     return data
 

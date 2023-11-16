@@ -1,0 +1,14 @@
+names:
+- Head
+- Player
+nc: 2
+path: C:\Users\max\source\repos\xeon-ai\model-example
+roboflow:
+  license: CC BY 4.0
+  project: counter-blox-640x640
+  url: https://universe.roboflow.com/xeon/counter-blox-640x640/dataset/8
+  version: 8
+  workspace: xeon
+test: ../test/images
+train: ./dataset//train/images
+val: ./dataset//valid/images
