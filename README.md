@@ -2,7 +2,7 @@
 This is a template repository that hosts a basic computer vision model, discoverable on [xeon](https://xeon.fun). It comes with a basic python package that you can use to manage your model as well as its dataset. We have created a simple guide on how to create and publish your own models with this template below.
 
 Before you start, make sure you have Python installed. You can install Python for your system [here](https://www.python.org/downloads/). Also, you need to install this project's dependencies. You can do this by running the following command in the root directory of this project:
-```console
+```
 pip install -r requirements.txt
 ```
 
