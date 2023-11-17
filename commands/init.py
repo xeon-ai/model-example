@@ -16,7 +16,6 @@ def get_manifest():
     # Get basic information on the project
     data['name'] = get_input('Project name')
     data['description'] = get_input('Project description')
-    data['version'] = get_input('Project version', '0.0.1')
     data['author'] = get_input('Author')
 
     print('---')
@@ -70,12 +69,17 @@ def init(args):
     # Check if we already have a manifest file
     if os.path.exists('manifest.json') and not args.force:
         print('A manifest file already exists. Use --force to overwrite it.')
-        return
-    
-    # Get the manifest data
-    manifest = get_manifest()
 
-    # Write the manifest file
-    with open('manifest.json', 'w') as f:
-        json.dump(manifest, f, indent=4)
+        # Load the manifest file
+        with open('manifest.json', 'r') as file:
+            manifest = json.load(file)
+    else:
+        # Get the manifest data
+        manifest = get_manifest()
+
+        # Write the manifest file
+        with open('manifest.json', 'w') as f:
+            json.dump(manifest, f, indent=4)
+    
+    update_dataset(manifest['dataset'], manifest['model']['baseModel'])
     

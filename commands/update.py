@@ -49,18 +49,6 @@ def update_dataset(dataset, base_model):
     with open('./dataset/data.yaml', 'w') as file:
         yaml.dump(data, file)
 
-def update_yolo_model(model):
-    """
-    Gets a YOLO model from the models folder. Otherwise it downloads it.
-    """
-    if os.path.isdir('yolo'):
-        shutil.rmtree('yolo')
-
-    os.mkdir('yolo')
-
-    if not os.path.exists(f'yolo/{model}.pt'):
-        urlretrieve(f'https://github.com/ultralytics/assets/releases/download/v0.0.0/{model}.pt', f'yolo/{model}.pt')
-
 def update(args):
     """
     Updates an existing project using the manifest file.
@@ -77,6 +65,3 @@ def update(args):
     # Check if this project uses a Roboflow dataset
     if 'dataset' in manifest and 'workspace' in manifest['dataset']:
         update_dataset(manifest['dataset'], manifest['model']['baseModel'])
-
-    # Update the YOLO model
-    update_yolo_model(manifest['model']['baseModel'])
