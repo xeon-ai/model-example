@@ -1,0 +1,14 @@
+{
+    "name": "Counter Blox",
+    "description": "A yolov8 object detection model trained to identify character models in Roblox's popular Counter Blox game.",
+    "author": "xeon",
+    "model": {
+        "baseModel": "yolov8n"
+    },
+    "dataset": {
+        "path": "https://universe.roboflow.com/xeon/counter-blox-640x640/dataset/8",
+        "workspace": "xeon",
+        "project": "counter-blox-640x640",
+        "version": 8
+    }
+}

@@ -20,6 +20,7 @@ def main():
     train_parser = subparsers.add_parser('train', description='Train a new model')
     train_parser.add_argument('--epochs', default=10, type=int, help='Number of epochs')
     train_parser.add_argument('--batch-size', default=8, type=int, help='Batch size')
+    train_parser.add_argument('--device', default='0', type=str, help='Device to use for training for multiple (e.g. 0,1,2,3)')
     train_parser.set_defaults(func=train)
 
     publish_parser = subparsers.add_parser('publish', description='Publish a model')

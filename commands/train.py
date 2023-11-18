@@ -19,7 +19,7 @@ def train(args):
         data="./dataset/data.yaml",
         epochs=args.epochs,
         batch=args.batch_size,
-        device=0,
+        device=args.device,
     )
 
     # Save the model in onnx format to the models folder

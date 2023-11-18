@@ -81,5 +81,3 @@ def init(args):
         with open('manifest.json', 'w') as f:
             json.dump(manifest, f, indent=4)
     
-    update_dataset(manifest['dataset'], manifest['model']['baseModel'])
-    
