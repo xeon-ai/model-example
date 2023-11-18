@@ -36,7 +36,7 @@ Now that we have our data installed and our project initialized, we can begin tr
 
 You can use the ``--epochs`` and ``--batch-size`` arguments to manipulate the size and duration of the training sessions. The default values are 10 and 8 respectively, and these (for most cases) are the optimal values for YOLO object recognition. If you are interested in getting more consistent results, you can train your model on a larger epoch value (e.g. 50 or 100).
 
-Training on your CPU can be quite slow so we recommend you train on your GPU. To do that, you must install CUDA and cuDNN. A good tutorial on how to set up such an environment can be found [here](https://medium.com/analytics-vidhya/installing-cuda-and-cudnn-on-windows-d44b8e9876b5).
+Training on your CPU can be quite slow so we recommend you train on your GPU. To do that, you must install CUDA and cuDNN. A good tutorial on how to set up such an environment can be found [here](https://medium.com/analytics-vidhya/installing-cuda-and-cudnn-on-windows-d44b8e9876b5). Once you're in a CUDA environment, use the `--device` argument to specify the devices you would like to use.
 
 ## Publishing
 After a successful training run, you should see a new directory pop up called `runs/`. This directory will contain all of your training, validation, or test runs and their outputs. To publish a run, use the following command:
